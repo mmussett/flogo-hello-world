@@ -24,6 +24,14 @@ spec:
   children: []
 ---
 apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: flogo
+  description: Everything related to flogo
+spec:
+  owner: group:flogo-developers
+---
+apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: flogo-hello-world
