@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: all-flogo-hello-world-importer-components
+  description: A collection of all components
+spec:
+  targets:
+    - ./catalog-info.yaml
