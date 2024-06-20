@@ -10,4 +10,4 @@ spec:
   lifecycle: experimental
   owner: DocGeneration
   providesApis:
-    - ['$flogo-hello-world-api']
+    - flogo-hello-world-api
