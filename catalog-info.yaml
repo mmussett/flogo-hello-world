@@ -8,9 +8,21 @@ metadata:
 spec:
   type: service
   lifecycle: experimental
-  owner: DocGeneration
+  owner: flogo-developers
   providesApis:
     - flogo-hello-world-api
+--- 
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: flogo-developers
+  description: TIBCO Flogo Developer Group
+spec:
+  type: organization
+  profile:
+    displayName: Flogo Developers
+    email: mmussett@tibco.com
+  children: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Location
