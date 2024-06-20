@@ -11,3 +11,11 @@ spec:
   owner: DocGeneration
   providesApis:
     - flogo-hello-world-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: flogo-hello-world-api-location
+spec:
+  targets:
+    - ./api-info.yaml
