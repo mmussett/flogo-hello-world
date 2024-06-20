@@ -4,7 +4,7 @@ metadata:
   name: flogo-hello-world-api
   description: Flogo Hello World REST API
   tags:
-    - REST
+    - rest
   links:
     - url: https://github.com/mmussett/flogo-hello-world
       title: GitHub Repo 
