@@ -6,6 +6,6 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: user:guest
+  owner: DocGeneration
   definition:
     $openapi: https://github.com/mmussett/flogo-hello-world/blob/main/src/openapi.yaml
