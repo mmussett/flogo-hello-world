@@ -8,7 +8,8 @@ spec:
   profile:
     displayName: Developers
     email: info@acme.com
-  children: [flogo-developers]
+  children: 
+    - flogo-developers
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Group
@@ -41,7 +42,7 @@ metadata:
 spec:
   type: service
   lifecycle: experimental
-  owner: flogo-developers
+  owner: DocGeneration
   providesApis:
     - flogo-hello-world-api
 ---
