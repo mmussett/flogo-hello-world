@@ -1,11 +1,18 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: flogo-hello-world
+  name: flogo-hello-world-api
   description: Flogo Hello World REST API
+  tags:
+    - REST
+  links:
+    - url: $https://github.com/mmussett/flogo-hello-world
+      title: GitHub Repo 
+      icon: github 
 spec:
   type: openapi
   lifecycle: experimental
   owner: DocGeneration
+  apiConsumedBy: ['components:flogo-hello-world']
   definition:
-    $openapi: https://github.com/mmussett/flogo-hello-world/blob/main/src/openapi.yaml
+    $text: ./api-spec/openapi.yaml
