@@ -1,11 +1,33 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: flogo-developers
-  description: TIBCO Flogo Developer Group
+  name: Developers
+  description: A group of Developers
 spec:
   type: organization
   profile:
-    displayName: Flogo Developers
-    email: mmussett@tibco.com
+    displayName: Developers
+    email: info@acme.com
+  children: 
+    - flogo-developers
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: flogo-developers
+  description: A group of Flogo Developers
+spec:
+  type: department
+  profile:
+    displayName: The Flogo Developerrs Group
+    email: info@acme.com
+  parent: Developers
   children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: flogo
+  description: Everything related to flogo
+spec:
+  owner: group:flogo-developers
