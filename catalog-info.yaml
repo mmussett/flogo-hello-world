@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: flogo-hello-world
+  description: Flogo version of hello-world
+  annotations:
+    github.com/project-slug: mmussett/flogo-hello-world
+spec:
+  type: service
+  lifecycle: experimental
+  owner: DocGeneration
