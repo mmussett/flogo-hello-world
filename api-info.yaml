@@ -15,7 +15,7 @@ metadata:
 spec:
   type: openapi
   lifecycle: experimental
-  owner: DocGeneration
+  owner: flogo-developers
   apiConsumedBy: 
     - components:flogo-hello-world
   definition:
