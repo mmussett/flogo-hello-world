@@ -20,9 +20,12 @@
       "description": "Simple REST Trigger",
       "settings": {
         "port": 9999,
-        "APISpecUpdate": false,
-        "swagger": "",
-        "swaggerVersion": "v2",
+        "APISpecUpdate": true,
+        "swagger": {
+          "filename": "openapi.json",
+          "content": "data:application/json;base64,ewogICJvcGVuYXBpIjogIjMuMC4wIiwKICAiaW5mbyI6IHsKICAgICJ0aXRsZSI6ICJGbG9nbyBIZWxsby1Xb3JsZCBBUEkgMy4wIiwKICAgICJkZXNjcmlwdGlvbiI6ICIiLAogICAgInRlcm1zT2ZTZXJ2aWNlIjogImh0dHA6Ly9zd2FnZ2VyLmlvL3Rlcm1zLyIsCiAgICAiY29udGFjdCI6IHsKICAgICAgImVtYWlsIjogIm1tdXNzZXR0QHRpYmNvLmNvbSIKICAgIH0sCiAgICAibGljZW5zZSI6IHsKICAgICAgIm5hbWUiOiAiQXBhY2hlIDIuMCIsCiAgICAgICJ1cmwiOiAiaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0xJQ0VOU0UtMi4wLmh0bWwiCiAgICB9LAogICAgInZlcnNpb24iOiAiMS4wLjAiCiAgfSwKICAiZXh0ZXJuYWxEb2NzIjogewogICAgImRlc2NyaXB0aW9uIjogIkZpbmQgb3V0IG1vcmUgYWJvdXQgU3dhZ2dlciIsCiAgICAidXJsIjogImh0dHA6Ly9zd2FnZ2VyLmlvIgogIH0sCiAgInNlcnZlcnMiOiBbCiAgICB7CiAgICAgICJ1cmwiOiAiaHR0cHM6Ly9mbG9nby52bWxhYi5saXZlL3RpYmNvL2FwcHMvY3BvbzRja2lraGZhamcyc2dzMWcvUmVjZWl2ZUhUVFBNZXNzYWdlIgogICAgfQogIF0sCiAgInBhdGhzIjogewogICAgIi9oZWxsby13b3JsZCI6IHsKICAgICAgImdldCI6IHsKICAgICAgICAic3VtbWFyeSI6ICJIZWxsby1Xb3JsZCIsCiAgICAgICAgImRlc2NyaXB0aW9uIjogIlNpbXBsZSBIZWxsbyBXb3JsZCBGbG9nbyBBcHBsaWNhdGlvbiIsCiAgICAgICAgIm9wZXJhdGlvbklkIjogImhlbGxvd29ybGQiLAogICAgICAgICJwYXJhbWV0ZXJzIjogWwogICAgICAgICAgewogICAgICAgICAgICAiaW4iOiAicXVlcnkiLAogICAgICAgICAgICAibmFtZSI6ICJuYW1lIiwKICAgICAgICAgICAgInJlcXVpcmVkIjogdHJ1ZSwKICAgICAgICAgICAgInNjaGVtYSI6IHsKICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgIH0KICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJyZXNwb25zZXMiOiB7CiAgICAgICAgICAiMjAwIjogewogICAgICAgICAgICAiZGVzY3JpcHRpb24iOiAiU3VjY2Vzc2Z1bCBvcGVyYXRpb24iLAogICAgICAgICAgICAiY29udGVudCI6IHsKICAgICAgICAgICAgICAiYXBwbGljYXRpb24vanNvbiI6IHsKICAgICAgICAgICAgICAgICJzY2hlbWEiOiB7CiAgICAgICAgICAgICAgICAgICJ0eXBlIjogIm9iamVjdCIsCiAgICAgICAgICAgICAgICAgICJwcm9wZXJ0aWVzIjogewogICAgICAgICAgICAgICAgICAgICJtc2ciOiB7CiAgICAgICAgICAgICAgICAgICAgICAidHlwZSI6ICJzdHJpbmciCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgICB9CiAgICAgICAgfQogICAgICB9CiAgICB9CiAgfQp9"
+        },
+        "swaggerVersion": "v3",
         "apiVersion": "1.0.0",
         "secureConnection": false,
         "serverKey": "",
@@ -33,6 +36,7 @@
         {
           "description": "",
           "settings": {
+            "APISpecPath": "/hello-world",
             "Method": "GET",
             "reqType": "application/json",
             "Path": "/hello-world",
@@ -71,18 +75,23 @@
                 "type": "json",
                 "value": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}",
                 "fe_metadata": "{\"type\":\"object\",\"properties\":{\"body\":{\"type\":\"any\"},\"headers\":{\"type\":\"object\"}}}"
+              },
+              "responseCodesSchema": {
+                "type": "json",
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"code\":{\"type\":\"number\"},\"responseType\":{\"type\":\"string\"},\"responseSchema\":{\"type\":\"string\"}}}}",
+                "fe_metadata": "[{\"code\":200,\"responseType\":\"object\",\"responseSchema\":\"{\\\"type\\\":\\\"object\\\",\\\"properties\\\":{\\\"msg\\\":{\\\"type\\\":\\\"string\\\"}}}\"}]"
               }
             },
             "output": {
               "queryParams": {
                 "type": "json",
                 "value": "{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"}},\"required\":[\"name\"]}",
-                "fe_metadata": "[{\"parameterName\":\"name\",\"type\":\"string\",\"repeating\":\"\",\"required\":\"true\"}]"
+                "fe_metadata": "[{\"parameterName\":\"name\",\"repeating\":\"false\",\"type\":\"string\",\"required\":\"true\"}]"
               },
-              "headers": {
+              "multipartForm": {
                 "type": "json",
-                "value": "{\"type\":\"object\",\"properties\":{\"Accept\":{\"type\":\"string\",\"visible\":false},\"Accept-Charset\":{\"type\":\"string\",\"visible\":false},\"Accept-Encoding\":{\"type\":\"string\",\"visible\":false},\"Content-Type\":{\"type\":\"string\",\"visible\":false},\"Content-Length\":{\"type\":\"string\",\"visible\":false},\"Connection\":{\"type\":\"string\",\"visible\":false},\"Cookie\":{\"type\":\"string\",\"visible\":false},\"Pragma\":{\"type\":\"string\",\"visible\":false}},\"required\":[]}",
-                "fe_metadata": "[{\"parameterName\":\"Accept\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Charset\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Accept-Encoding\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Type\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Content-Length\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Connection\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Cookie\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false},{\"parameterName\":\"Pragma\",\"type\":\"string\",\"repeating\":\"false\",\"required\":\"false\",\"visible\":false}]"
+                "value": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"array\",\"items\":{}}",
+                "fe_metadata": "[]"
               }
             }
           },
@@ -220,7 +229,7 @@
         },
         "title": "ReceiveHTTPMessage",
         "swagger": {
-          "swagger": "2.0",
+          "openapi": "3.0.0",
           "info": {
             "title": "flogo-hello-world",
             "version": "1.0.0",
@@ -237,26 +246,34 @@
                     "in": "query",
                     "description": "Request parameter",
                     "required": true,
-                    "type": "string"
+                    "schema": {
+                      "type": "string"
+                    }
                   }
                 ],
                 "responses": {
                   "200": {
-                    "description": "Rest Response",
-                    "schema": {
-                      "$ref": "#/definitions/schema1"
+                    "description": "",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/schema1"
+                        }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "definitions": {
-            "schema1": {
-              "type": "object",
-              "properties": {
-                "msg": {
-                  "type": "string"
+          "components": {
+            "schemas": {
+              "schema1": {
+                "type": "object",
+                "properties": {
+                  "msg": {
+                    "type": "string"
+                  }
                 }
               }
             }
