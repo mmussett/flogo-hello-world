@@ -3,6 +3,13 @@ kind: Component
 metadata:
   name: flogo-hello-world
   description: Flogo version of hello-world
+  tags:
+    - backend
+    - data-layer
+    - flogo
+  links:
+    - title: Repository
+      url: https://github.com/mmussett/flogo-hello-world
   annotations:
     github.com/project-slug: mmussett/flogo-hello-world
     backstage.io/techdocs-ref: dir:.
