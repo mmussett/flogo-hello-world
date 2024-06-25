@@ -12,6 +12,7 @@
     <property name="token" value="${env.TOKEN}"/>
 
     <echo message="TOKEN: ${token}"/>
+    <echo message="APP_ID: ${appid}"/>
     <echo message="BASE_URL ${base_url}"/>
     <echo message="APP_JSON: ${app_json}"/>
     <echo message="TARGET_OS: ${target_os}"/>
@@ -125,6 +126,36 @@
             <arg value="Authorization: Bearer ${token}" />
             <arg value="--data" />
             <arg value="@./deploy/app-deploy.json" />
+        </exec>
+
+    </target>
+
+    <target name="delete" depends="">
+
+        <fail message="TOKEN not set.">
+            <condition>
+                <not>
+                    <isset property="env.TOKEN"/>
+                </not>
+            </condition>
+        </fail>
+
+        <fail message="APP_ID not set.">
+            <condition>
+                <not>
+                    <isset property="env.APP_ID"/>
+                </not>
+            </condition>
+        </fail>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="DELETE" />
+            <arg value="https://${base_url}/v1/dp/apps/${app_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
         </exec>
 
 
