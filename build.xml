@@ -24,7 +24,7 @@
     </target>
 
 
-    <target name="build-using-appjson" depends="init">
+    <target name="build" depends="init">
         
         <fail message="TOKEN not set.">
             <condition>
