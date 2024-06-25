@@ -11,8 +11,6 @@
     <property name="appid" value="${env.APP_ID}"/>
     <property name="token" value="${env.TOKEN}"/>
 
-
-    <echo message="APP_ID: ${appid}"/>
     <echo message="TOKEN: ${token}"/>
     <echo message="BASE_URL ${base_url}"/>
     <echo message="APP_JSON: ${app_json}"/>

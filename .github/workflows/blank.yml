@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     env:
+      BASE_URL: devhub.vmlab.live
       TOKEN: ${{secrets.TOKEN}}
       APP_JSON: flogo-hello-world.flogo
       TARGET_ARCH: amd64
