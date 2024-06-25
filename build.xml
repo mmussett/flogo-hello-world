@@ -124,7 +124,7 @@
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
             <arg value="--data" />
-            <arg value="app.json=@./deploy/${deploy_json}" />
+            <arg value="app.json=@./deploy/app-deploy.json" />
         </exec>
 
 
