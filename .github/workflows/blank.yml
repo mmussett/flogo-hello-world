@@ -18,8 +18,8 @@ jobs:
       REGISTRY_PASSWORD: ${{secrets.REGISTRY_PASSWORD}}
       REGISTRY_SERVER: registry.vmlab.live
       APP_ID: dnqcj37vr75gcqpwmrg4nthgro5xyuht
-      APP_JSON: OrderRetrieveOrchestrator.json
-      EXECUTABLE_NAME: orderRetrieveOrchestrator
+      APP_JSON: flogo-hello-world.json
+      EXECUTABLE_NAME: flogo-hello-world
       TARGET_ARCH: amd64
       TARGET_OS: linux
       CONTAINER_NAME: order-retrieve-orchestrator
