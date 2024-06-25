@@ -130,6 +130,35 @@
 
     </target>
 
+    
+    <target name="download" depends="build">
+
+        <fail message="TOKEN not set.">
+            <condition>
+                <not>
+                    <isset property="env.TOKEN"/>
+                </not>
+            </condition>
+        </fail>
+
+        <exec executable="jq" outputproperty="build_id">
+            <arg value="--raw-output"/>
+            <arg value=".buildId"/>
+            <arg value="build.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="GET" />
+            <arg value="https://${base_url}/v1/dp/builds/${build_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/octet-stream" />
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+        </exec>
+
+    </target>
+
     <target name="delete" depends="">
 
         <fail message="TOKEN not set.">
