@@ -1,7 +1,7 @@
 {
     "userAppName": "flogo-hello-world",
     "appName": "flogo-hello-world",
-    "appVersion": "1.0.0",
+    "appVersion": "2.0.0",
     "systemProperties": [
      {
       "name": "FLOGO_LOG_LEVEL",
