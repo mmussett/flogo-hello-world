@@ -84,14 +84,50 @@
             <arg value="build.json" />
         </exec>
 
-       <exec executable="jq" outputproperty="build_id">
-           <arg value="--raw-output"/>
-           <arg value=".buildId"/>
-           <arg value="build.json"/>
-       </exec>
+        <exec executable="jq" outputproperty="build_id">
+            <arg value="--raw-output"/>
+            <arg value=".buildId"/>
+            <arg value="build.json"/>
+        </exec>
 
         <echo message="Generated BUILD_ID: ${build_id}" />
-        
+
+
+    </target>
+
+
+
+    <target name="deploy" depends="build">
+
+        <fail message="TOKEN not set.">
+            <condition>
+                <not>
+                    <isset property="env.TOKEN"/>
+                </not>
+            </condition>
+        </fail>
+
+        <exec executable="jq" outputproperty="build_id">
+            <arg value="--raw-output"/>
+            <arg value=".buildId"/>
+            <arg value="build.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="POST" />
+            <arg value="https://${base_url}/v1/dp/builds/${build_id}/deploy?buildId=${build_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />
+            <arg value="--header" />
+            <arg value="Content-Type: application/json" />        
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+            <arg value="--data" />
+            <arg value="app.json=@./deploy/${deploy_json}" />
+        </exec>
+
+
     </target>
 
     <target name="all" depends="clean, build">
