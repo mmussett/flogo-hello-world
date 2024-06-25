@@ -117,7 +117,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="POST" />
-            <arg value="https://${base_url}/v1/dp/builds/${build_id}/deploy?buildId=${build_id}" />
+            <arg value="https://${base_url}/v1/dp/builds/${build_id}/deploy" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
@@ -147,6 +147,19 @@
                 </not>
             </condition>
         </fail>
+
+
+        <!-- Scale to 0 -->
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="PUT" />
+            <arg value="https://${base_url}/v1/dp/apps/${app_id}/scale/0" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+        </exec>
 
         <exec executable="curl">
             <arg value="-X" />
