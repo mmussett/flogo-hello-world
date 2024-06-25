@@ -73,7 +73,7 @@
             <arg value="-X" />
             <arg value="POST" />
             <arg value="--location" />
-            <arg value="https://${base_url}/v1/dp/builds?os=${target_os}&amp;arch=${target_arch}&amp;name=${executable_name}" />
+            <arg value="https://${base_url}/v1/dp/builds?os=${target_os}&amp;arch=${target_arch}" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
