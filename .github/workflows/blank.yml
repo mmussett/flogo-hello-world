@@ -13,8 +13,7 @@ jobs:
   build:
     env:
       TOKEN: ${{secrets.TOKEN}}
-      APP_JSON: flogo-hello-world.json
-      EXECUTABLE_NAME: flogo-hello-world
+      APP_JSON: flogo-hello-world.flogo
       TARGET_ARCH: amd64
       TARGET_OS: linux
 
