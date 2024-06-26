@@ -1,4 +1,14 @@
 {
     "appName": "flogo-hello-world",
-    "appId":"cpte2lcikhfajg2sgs4g"
+    "appId":"cpte2lcikhfajg2sgs4g",
+    "resourceLimits": {
+        "limits": {
+         "cpu": "500m",
+         "memory": "1Gi"
+        },
+        "requests": {
+         "cpu": "250m",
+         "memory": "512Mi"
+        }
+    }
 }
