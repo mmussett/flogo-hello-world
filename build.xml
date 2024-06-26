@@ -128,6 +128,8 @@
             <arg value="@./deploy/app-deploy.json" />
         </exec>
 
+        <sleep seconds="15"/>
+
     </target>
 
     
@@ -169,13 +171,11 @@
             </condition>
         </fail>
 
-        <fail message="APP_ID not set.">
-            <condition>
-                <not>
-                    <isset property="env.APP_ID"/>
-                </not>
-            </condition>
-        </fail>
+        <exec executable="jq" outputproperty="appid">
+            <arg value="--raw-output"/>
+            <arg value=".appId"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
 
 
         <!-- Scale to 0 -->
@@ -183,7 +183,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="PUT" />
-            <arg value="https://${base_url}/v1/dp/apps/${app_id}/scale/0" />
+            <arg value="https://${base_url}/v1/dp/apps/${appid}/scale/0" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -193,7 +193,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="DELETE" />
-            <arg value="https://${base_url}/v1/dp/apps/${app_id}" />
+            <arg value="https://${base_url}/v1/dp/apps/${appid}" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />

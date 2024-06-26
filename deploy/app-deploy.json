@@ -1,40 +1,4 @@
 {
-    "userAppName": "flogo-hello-world",
-    "appId": "cpoo4ckikhfajg2sgs1g",
     "appName": "flogo-hello-world",
-    "appVersion": "2.0.0",
-    "namespace": "tibco-ns",
-    "eula": true,
-    "systemProperties": [
-     {
-      "name": "FLOGO_LOG_LEVEL",
-      "value": "ERROR",
-      "type": "string"
-     },
-     {
-      "name": "FLOGO_OTEL_TRACE",
-      "value": "false",
-      "type": "boolean"
-     }
-    ],
-    "resourceLimits": {
-     "limits": {
-      "cpu": "500m",
-      "memory": "1Gi"
-     },
-     "requests": {
-      "cpu": "250m",
-      "memory": "512Mi"
-     }
-    },
-    "portMappings": [
-     {
-      "name": "port-9999",
-      "hostPort": "9999",
-      "containerPort": "9999",
-      "protocol": "TCP"
-     }
-    ],
-    "serviceMeshEnabled": true,
-    "lastUpdated": "1718714930"
-   }
+    "appId":"cpte2lcikhfajg2sgs4g"
+}
