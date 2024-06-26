@@ -16,6 +16,7 @@ metadata:
 spec:
   type: service
   lifecycle: experimental
+  system: hello-world-system
   owner: flogo-developers
   providesApis:
     - flogo-hello-world-api
