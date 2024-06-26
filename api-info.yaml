@@ -12,6 +12,9 @@ metadata:
     - url: https://github.com/mmussett/flogo-hello-world/blob/main/api-spec/openapi.yaml
       title: API Spec 
       icon: code
+    - url: https://editor.swagger.io/?spec=https://github.com/mmussett/flogo-hello-world/blob/main/api-spec/openapi.yaml
+      title: Swagger Editor 
+      icon: code
 spec:
   type: openapi
   lifecycle: experimental
