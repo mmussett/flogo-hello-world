@@ -9,5 +9,5 @@ spec:
     - ./system.yaml
     - ./catalog-info.yaml
     - ./api-info.yaml
-    - ./mkdocs.yaml
+
     
