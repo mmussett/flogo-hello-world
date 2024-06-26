@@ -10,6 +10,8 @@ metadata:
   links:
     - title: Repository
       url: https://github.com/mmussett/flogo-hello-world
+    - title: VSCode
+      url: vscode://vscode.git/clone?url=https://github.com/mmussett/flogo-hello-world
   annotations:
     github.com/project-slug: mmussett/flogo-hello-world
     backstage.io/techdocs-ref: dir:.
