@@ -17,7 +17,6 @@ jobs:
       APP_JSON: flogo-hello-world.flogo
       TARGET_ARCH: amd64
       TARGET_OS: linux
-
       
     runs-on: self-hosted
     

@@ -17,29 +17,29 @@
     <!-- This ant script is used to build and deploy flogo apps to a TIBCO Data Plane -->
     <property environment="env"/>
 
-        <fail message="TOKEN not set.">
-            <condition>
-                <not>
-                    <isset property="env.TOKEN"/>
-                </not>
-            </condition>
-        </fail>
+    <fail message="TOKEN not set.">
+        <condition>
+            <not>
+                <isset property="env.TOKEN"/>
+            </not>
+        </condition>
+    </fail>
 
-        <fail message="BASE_URL not set.">
-            <condition>
-                <not>
-                    <isset property="env.BASE_URL"/>
-                </not>
-            </condition>
-        </fail>
+    <fail message="BASE_URL not set.">
+        <condition>
+            <not>
+                <isset property="env.BASE_URL"/>
+            </not>
+        </condition>
+    </fail>
 
-        <fail message="APP_JSON not set.">
-            <condition>
-                <not>
-                    <isset property="env.APP_JSON"/>
-                </not>
-            </condition>
-        </fail>
+    <fail message="APP_JSON not set.">
+        <condition>
+            <not>
+                <isset property="env.APP_JSON"/>
+            </not>
+        </condition>
+    </fail>
 
     <property name="base_url" value="${env.BASE_URL}"/>
     <property name="app_json" value="${env.APP_JSON}"/>
@@ -168,6 +168,40 @@
 
     </target>
 
+
+    <target name="scale-app" depends="init" if="deploy.present">
+
+
+        <fail message="APP_SCALE not set.">
+            <condition>
+                <not>
+                    <isset property="env.APP_SCALE"/>
+                </not>
+            </condition>
+        </fail>
+
+        <property name="scale" value="${env.APP_SCALE}"/>
+
+        <exec executable="jq" outputproperty="appId">
+            <arg value="--raw-output"/>
+            <arg value=".appId"/>
+            <arg value="./deploy.json"/>
+        </exec>        
+
+        <echo message="Scaling Flogo application ${appName} with AppId ${appId}"/>
+
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="PUT" />
+            <arg value="https://${base_url}/v1/dp/apps/${appId}/scale/${scale}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+        </exec>
+
+    </target>
 
     <target name="delete-app" depends="init" if="deploy.present">
 

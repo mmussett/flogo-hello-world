@@ -9,5 +9,6 @@
          "cpu": "250m",
          "memory": "512Mi"
         }
-    }
+    },
+    "replicas": 1
 }
