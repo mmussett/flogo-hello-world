@@ -45,6 +45,14 @@
     <property name="app_json" value="${env.APP_JSON}"/>
     <property name="token" value="${env.TOKEN}"/>
 
+    <property name="provisioner_build_wait_interval" value="${env.PROVISIONER_BUILD_WAIT_INTERVAL}"/>
+    <property name="provisioner_deploy_wait_interval" value="${env.PROVISIONER_DEPLOY_WAIT_INTERVAL}"/>
+    <property name="provisioner_delete_wait_interval" value="${env.PROVISIONER_DELETE_WAIT_INTERVAL}"/>
+    <property name="provisioner_scale_wait_interval" value="${env.PROVISIONER_SCALE_WAIT_INTERVAL}"/>"
+    <property name="provisioner_service_mesh_wait_interval" value="${env.PROVISIONER_SERVICE_MESH_WAIT_INTERVAL}"/>
+    <property name="provisioner_public_endpoint_interval" value="${env.PROVISIONER_PUBLIC_ENDPOINT_INTERVAL}"/>
+
+
     <echo message="TOKEN: ${token}"/>
     <echo message="BASE_URL ${base_url}"/>
     <echo message="APP_JSON: ${app_json}"/>
@@ -94,9 +102,8 @@
         <echo message="Generated BUILD_ID: ${build_id}" />
 
         <!-- Need to sleep for at least 15 seconds as the build is asynchronous, waiting for the flogo provisioner to actually do its thing! -->
-        <echo message="Waiting for Flogo Provisioner to complete (15 seconds)" />
-
-        <sleep seconds="15"/>
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_build_wait_interval} seconds)" />
+        <sleep seconds="${provisioner_build_wait_interval}"/>
 
     </target>
 
@@ -141,7 +148,9 @@
         </exec>
 
         <!-- Wait for Flogo Provisioner to deploy application -->
-        <sleep seconds="20"/>
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_deploy_wait_interval} seconds)" />        
+        <sleep seconds="${provisioner_deploy_wait_interval}"/>
+
 
         <echo message="Application ${appName} deployed as AppId ${appId}"/>
 
@@ -165,6 +174,9 @@
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
         </exec>
+
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_delete_wait_interval} seconds)" />        
+        <sleep seconds="${provisioner_delete_wait_interval}"/>
 
     </target>
 
@@ -191,7 +203,8 @@
 
 
         <!-- Wait for Flogo Provisioner to enable service mesh sidecar pod for application -->
-        <sleep seconds="15"/>
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_service_mesh_wait_interval} seconds)" />  
+        <sleep seconds="${provisioner_service_mesh_wait_interval}"/>
 
     </target>
 
@@ -223,7 +236,9 @@
         </exec>        
 
         <!-- Wait for Flogo Provisioner to enable public endpoints -->
-        <sleep seconds="15"/>
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_public_endpoint_interval} seconds)" />  
+        <sleep seconds="${provisioner_public_endpoint_interval}"/>
+
 
     </target>
 
@@ -261,7 +276,9 @@
 
 
         <!-- Wait for Flogo Provisioner to scale application -->
-        <sleep seconds="20"/>
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_scale_wait_interval} seconds)" />  
+        <sleep seconds="${provisioner_scale_wait_interval}"/>
+
 
     </target>
 
@@ -294,6 +311,9 @@
             <arg value="Authorization: Bearer ${token}" />
         </exec>
 
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_scale_wait_interval} seconds)" />  
+        <sleep seconds="${provisioner_scale_wait_interval}"/>
+
         <exec executable="curl">
             <arg value="-X" />
             <arg value="DELETE" />
@@ -303,6 +323,9 @@
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
         </exec>
+
+        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_delete_wait_interval} seconds)" />  
+        <sleep seconds="${provisioner_delete_wait_interval}"/>
 
     </target>
 

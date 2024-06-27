@@ -1,7 +1,8 @@
 {
     "ingressClassName": "nginx",
-    "ingressControllerName": "flogo nginx",
+    "ingressControllerName": "nginx",
     "ingressHostName": "flogo.vmlab.live",
+    "ingressTLSConfigs": [],
     "portServicePathMappings": [
       {
         "port": 9999,
