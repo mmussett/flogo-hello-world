@@ -89,7 +89,7 @@
     </target>
 
 
-    <target name="get_all_apps" depends="">
+    <target name="get-all-apps" depends="">
 
 
         <exec executable="curl">
