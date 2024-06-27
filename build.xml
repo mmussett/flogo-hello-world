@@ -102,7 +102,7 @@
 
 
 
-    <target name="deploy" depends="init, build">
+    <target name="deploy" depends="init">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -168,6 +168,28 @@
 
     </target>
 
+    <target name="enable-service-mesh" depends="init" if="deploy.present">
+
+        <exec executable="jq" outputproperty="appId">
+            <arg value="--raw-output"/>
+            <arg value=".appId"/>
+            <arg value="./deploy.json"/>
+        </exec>        
+
+        <echo message="Enabling Service Mesh for Flogo application ${appName} with AppId ${appId}"/>
+
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="PUT" />
+            <arg value="https://${base_url}/v1/dp/apps/${appId}/servicemesh?enable=true" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+        </exec>
+
+    </target>
 
     <target name="scale-app" depends="init" if="deploy.present">
 
