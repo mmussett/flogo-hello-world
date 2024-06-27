@@ -136,7 +136,12 @@
 
 
 
-    <target name="deploy" depends="" if="">
+    <target name="deploy">
+        <available file="./build.json" property="build.present"/>
+        <antcall target="_deploy"/>
+    </target>
+
+    <target name="_deploy" depends="" if="build.present">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -184,6 +189,7 @@
 
     </target>
 
+
     <target name="delete-build">
         <available file="./build.json" property="build.present"/>
         <antcall target="_delete-build"/>
@@ -212,7 +218,13 @@
 
     </target>
 
-    <target name="enable-service-mesh" depends="" if="">
+
+    <target name="enable-service-mesh">
+        <available file="./deploy.json" property="deploy.present"/>
+        <antcall target="_enable-service-mesh"/>
+    </target>
+
+    <target name="_enable-service-mesh" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
@@ -241,7 +253,12 @@
     </target>
 
 
-    <target name="enable-public-endpoints" depends="" if="">
+    <target name="enable-public-endpoints">
+        <available file="./deploy.json" property="deploy.present"/>
+        <antcall target="_enable-public-endpoints"/>
+    </target>
+
+    <target name="enable-public-endpoints" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
@@ -274,8 +291,13 @@
 
     </target>
 
-    <target name="scale-app" depends="" if="">
 
+    <target name="scale-app">
+        <available file="./deploy.json" property="deploy.present"/>
+        <antcall target="_scale-app"/>
+    </target>
+
+    <target name="_scale-app" depends="" if="deploy.present">
 
         <fail message="APP_SCALE not set.">
             <condition>
@@ -315,11 +337,8 @@
     </target>
 
     <target name="delete-app">
-    
         <available file="./deploy.json" property="deploy.present"/>
-
         <antcall target="_delete-app"/>
-
     </target>
     
     <target name="_delete-app" depends="" if="deploy.present">
