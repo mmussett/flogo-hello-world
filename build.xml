@@ -53,8 +53,7 @@
     <target name="init">
     </target>
 
-    <target name="clean">
-      <antcall target="delete-app-and-build"/>
+    <target name="clean" depends="delete-app-and-build">
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
     </target>
@@ -216,14 +215,10 @@
 
     </target>
 
-    <target name="delete-app-and-build">
-
-        <antcall target="delete-app"/>
-        <antcall target="delete-build"/>
-
+    <target name="delete-app-and-build" depends="delete-app, delete-build">
     </target>
 
-    <target name="all" depends="clean, build">
+    <target name="all" depends="clean, build, deploy">
     </target>
 
 </project>
