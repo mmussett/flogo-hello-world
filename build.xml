@@ -109,7 +109,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="GET" />
-            <arg value="https://${base_url}/v1/dp/builds/${buildId}/status" />
+            <arg value="https://${base_url}/v1/dp/builds/${build_id}/status" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
