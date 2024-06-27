@@ -106,7 +106,7 @@
 
         <exec executable="jq" outputproperty="appid">
             <arg value="--raw-output"/>
-            <arg value=".data[] | select(.app_name == \"flogo-hello-world\") | select(.capability_id == \"FLOGO\") | .app_id"/>
+            <arg value=".data[] | select(.app_name == &quote;flogo-hello-world&quote;) | select(.capability_id == &quote;FLOGO&quote;) | .app_id"/>
             <arg value="dp-apps.json"/>
         </exec>
 
