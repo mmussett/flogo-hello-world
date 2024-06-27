@@ -25,10 +25,10 @@
         </condition>
     </fail>
 
-    <fail message="db_base_url not set.">
+    <fail message="dp_base_url not set.">
         <condition>
             <not>
-                <isset property="env.DB_BASE_URL"/>
+                <isset property="env.DP_BASE_URL"/>
             </not>
         </condition>
     </fail>
@@ -41,7 +41,7 @@
         </condition>
     </fail>
 
-    <property name="db_base_url" value="${env.DB_BASE_URL}"/>
+    <property name="dp_base_url" value="${env.DP_BASE_URL}"/>
     <property name="app_json" value="${env.APP_JSON}"/>
     <property name="token" value="${env.TOKEN}"/>
 
@@ -54,7 +54,7 @@
 
 
     <echo message="TOKEN: ${token}"/>
-    <echo message="db_base_url ${dp_base_url}"/>
+    <echo message="dp_base_url ${dp_base_url}"/>
     <echo message="APP_JSON: ${app_json}"/>
 
     
