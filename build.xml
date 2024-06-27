@@ -81,7 +81,7 @@
     <target name="init">
     </target>
 
-    <target name="clean" depends="delete-app-and-build">
+    <target name="clean" depends="delete-deployed-app">
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
       <delete file="./build-status.json"/>
