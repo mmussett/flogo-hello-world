@@ -424,8 +424,7 @@
             <arg value="Authorization: Bearer ${token}" />
         </exec>
 
-        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_scale_wait_interval} seconds)" />  
-        <sleep seconds="${provisioner_scale_wait_interval}"/>
+        <sleep seconds="10"/>
 
         <exec executable="curl">
             <arg value="-X" />
