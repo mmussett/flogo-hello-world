@@ -69,6 +69,7 @@
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
       <delete file="./build-status.json"/>
+      <delete file="./endpoint.json"/>
     </target>
 
 
@@ -117,12 +118,15 @@
             <arg value="--output" />
             <arg value="build-status.json" />
         </exec>
-    
+
         <exec executable="jq" outputproperty="build.status">
             <arg value="--raw-output"/>
             <arg value=".status"/>
             <arg value="./build-status.json"/>
         </exec>    
+
+    
+        <echo message="Build status was: ${build.status}"/>
 
         <fail message="Build failed: Property '.status' is not equal to 'Success'">
             <condition>
