@@ -24,5 +24,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Building app executable using application json 
-      run: ant -noinput -buildfile build.xml clean 
+    - name: Cleaning pipeline and target dataplane 
+      run: ant -keep-going -noinput -buildfile build.xml clean
+
+
+    - name: Build and deploy 
+      run: ant -noinput -buildfile build.xml build deploy

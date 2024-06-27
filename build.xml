@@ -98,7 +98,7 @@
 
 
 
-    <target name="deploy" depends="">
+    <target name="deploy" depends="build">
 
         <require file="./build.json" />
         <require file="./deploy/app-deploy.json" />
