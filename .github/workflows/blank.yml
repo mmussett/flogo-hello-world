@@ -23,9 +23,5 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Cleaning pipeline and target dataplane 
-      run: ant -keep-going -noinput -buildfile build.xml clean
-
-
     - name: Build and deploy 
-      run: ant -noinput -buildfile build.xml build deploy
+      run: ant -noinput -buildfile build.xml init clean build deploy enable-service-mesh enable-public-endpoints
