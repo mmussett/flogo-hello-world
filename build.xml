@@ -98,7 +98,6 @@
         </exec>
 
         <exec executable="curl">
-            <arg value="-s" />
             <arg value="-X" />
             <arg value="GET" />
             <arg value="${cp_base_url}/cp/v1/apps?dp_id=${dp_id}" />
