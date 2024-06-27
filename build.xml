@@ -258,7 +258,7 @@
         <antcall target="_enable-public-endpoints"/>
     </target>
 
-    <target name="enable-public-endpoints" depends="" if="deploy.present">
+    <target name="_enable-public-endpoints" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
