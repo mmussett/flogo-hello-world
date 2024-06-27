@@ -108,6 +108,13 @@
 
         <antcall target="get-build-status"/>
 
+        <fail message="Build failed: Property '.status' is not equal to 'Success'">
+            <condition>
+                <not>
+                    <equals arg1="${build.status}" arg2="Success"/>
+                </not>
+            </condition>
+        </fail>
 
     </target>
 
