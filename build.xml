@@ -75,6 +75,8 @@
         <echo message="Generated BUILD_ID: ${build_id}" />
 
         <!-- Need to sleep for at least 15 seconds as the build is asynchronous, waiting for the flogo provisioner to actually do its thing! -->
+        <echo message="Waiting for Flogo Provisioner to complete (15 seconds)" />
+
         <sleep seconds="15"/>
 
     </target>
@@ -121,7 +123,28 @@
 
     </target>
 
-    
+    <target name="delete-build" depends="">
+
+        <exec executable="jq" outputproperty="buildId">
+            <arg value="--raw-output"/>
+            <arg value=".buildId"/>
+            <arg value="build.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="DELETE" />
+            <arg value="https://${base_url}/v1/dp/builds/${buildId}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+        </exec>
+
+
+    </target>
+
+
     <target name="delete" depends="">
 
         <exec executable="jq" outputproperty="appId">
@@ -144,7 +167,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="PUT" />
-            <arg value="https://${base_url}/v1/dp/apps/${appid}/scale/0" />
+            <arg value="https://${base_url}/v1/dp/apps/${appId}/scale/0" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -154,7 +177,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="DELETE" />
-            <arg value="https://${base_url}/v1/dp/apps/${appid}" />
+            <arg value="https://${base_url}/v1/dp/apps/${appId}" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
