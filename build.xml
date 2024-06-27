@@ -89,7 +89,7 @@
     </target>
 
 
-    <target name="get-all-apps" depends="">
+    <target name="get-app-id" depends="">
 
 
         <exec executable="curl">
@@ -103,6 +103,14 @@
             <arg value="--output" />
             <arg value="dp-apps.json" />
         </exec>
+
+        <exec executable="jq" outputproperty="appid">
+            <arg value="--raw-output"/>
+            <arg value=".data[] | select(.app_name == \"flogo-hello-world\") | select(.capability_id == \"FLOGO\") | .app_id"/>
+            <arg value="dp-apps.json"/>
+        </exec>
+
+        <echo message="${appid}"/>
 
     </target>
 
