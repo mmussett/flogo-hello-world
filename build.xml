@@ -51,15 +51,19 @@
 
     
     <target name="init">
+
+        <available file="./build.json" property="build.present"/>
+        <available file="./deploy.json" property="deploy.present"/>
+
     </target>
 
-    <target name="clean" depends="delete-app-and-build">
+    <target name="clean" depends="init, delete-app-and-build">
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
     </target>
 
 
-    <target name="build" depends="">
+    <target name="build" depends="init">
         
         <require file="./src/${app_json}" />
 
@@ -98,10 +102,7 @@
 
 
 
-    <target name="deploy" depends="build">
-
-        <require file="./build.json" />
-        <require file="./deploy/app-deploy.json" />
+    <target name="deploy" depends="init, build">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -147,14 +148,7 @@
 
     </target>
 
-    <target name="delete-build" depends="">
-
-        <available file="./build.json" property="build.present"/>
-
-
-        <if>
-            <isset property="build.present"/>
-            <then>
+    <target name="delete-build" depends="init" if="build.present">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -172,20 +166,10 @@
             <arg value="Authorization: Bearer ${token}" />
         </exec>
 
-                    </then>
-        </if>
-
     </target>
 
 
-    <target name="delete-app" depends="">
-
-        <available file="./deploy.json" property="deploy.present"/>
-
-        <if>
-            <isset property="deploy.present"/>
-            <then>
-
+    <target name="delete-app" depends="init" if="deploy.present">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
@@ -223,9 +207,6 @@
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
         </exec>
-
-                    </then>
-        </if>
 
     </target>
 
