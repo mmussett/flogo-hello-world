@@ -48,7 +48,7 @@
     <property name="provisioner_build_wait_interval" value="${env.PROVISIONER_BUILD_WAIT_INTERVAL}"/>
     <property name="provisioner_deploy_wait_interval" value="${env.PROVISIONER_DEPLOY_WAIT_INTERVAL}"/>
     <property name="provisioner_delete_wait_interval" value="${env.PROVISIONER_DELETE_WAIT_INTERVAL}"/>
-    <property name="provisioner_scale_wait_interval" value="${env.PROVISIONER_SCALE_WAIT_INTERVAL}"/>"
+    <property name="provisioner_scale_wait_interval" value="${env.PROVISIONER_SCALE_WAIT_INTERVAL}"/>
     <property name="provisioner_service_mesh_wait_interval" value="${env.PROVISIONER_SERVICE_MESH_WAIT_INTERVAL}"/>
     <property name="provisioner_public_endpoint_interval" value="${env.PROVISIONER_PUBLIC_ENDPOINT_INTERVAL}"/>
 
