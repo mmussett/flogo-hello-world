@@ -12,7 +12,8 @@ on:
 jobs:
   build:
     env:
-      BASE_URL: devhub.vmlab.live/tibco/flogo/cpol44ihntso8gmhn1u0/public
+      CP_BASE_URL: https://tibcoatseuce1.eu-west.my.tibco.com
+      DP_BASE_URL: https://devhub.vmlab.live/tibco/flogo/cpol44ihntso8gmhn1u0/public
       TOKEN: ${{secrets.TOKEN}}
       APP_JSON: flogo-hello-world.flogo
       TARGET_ARCH: amd64

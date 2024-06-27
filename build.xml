@@ -25,10 +25,10 @@
         </condition>
     </fail>
 
-    <fail message="BASE_URL not set.">
+    <fail message="db_base_url not set.">
         <condition>
             <not>
-                <isset property="env.BASE_URL"/>
+                <isset property="env.DB_BASE_URL"/>
             </not>
         </condition>
     </fail>
@@ -41,7 +41,7 @@
         </condition>
     </fail>
 
-    <property name="base_url" value="${env.BASE_URL}"/>
+    <property name="db_base_url" value="${env.DB_BASE_URL}"/>
     <property name="app_json" value="${env.APP_JSON}"/>
     <property name="token" value="${env.TOKEN}"/>
 
@@ -54,7 +54,7 @@
 
 
     <echo message="TOKEN: ${token}"/>
-    <echo message="BASE_URL ${base_url}"/>
+    <echo message="db_base_url ${db_base_url}"/>
     <echo message="APP_JSON: ${app_json}"/>
 
     
@@ -78,7 +78,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="POST" />
-            <arg value="https://${base_url}/v1/dp/builds" />
+            <arg value="${db_base_url}/v1/dp/builds" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
@@ -106,7 +106,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="GET" />
-            <arg value="https://${base_url}/v1/dp/builds/${build_id}/status" />
+            <arg value="${db_base_url}/v1/dp/builds/${build_id}/status" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -160,7 +160,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="POST" />
-            <arg value="https://${base_url}/v1/dp/builds/${buildId}/deploy" />
+            <arg value="${db_base_url}/v1/dp/builds/${buildId}/deploy" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
@@ -206,7 +206,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="DELETE" />
-            <arg value="https://${base_url}/v1/dp/builds/${buildId}" />
+            <arg value="${db_base_url}/v1/dp/builds/${buildId}" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -238,7 +238,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="PUT" />
-            <arg value="https://${base_url}/v1/dp/apps/${appId}/servicemesh?enable=true" />
+            <arg value="${db_base_url}/v1/dp/apps/${appId}/servicemesh?enable=true" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -271,7 +271,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="POST" />
-            <arg value="https://${base_url}/v1/dp/apps/${appId}/endpoints/public" />
+            <arg value="${db_base_url}/v1/dp/apps/${appId}/endpoints/public" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
@@ -321,7 +321,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="PUT" />
-            <arg value="https://${base_url}/v1/dp/apps/${appId}/scale/${scale}" />
+            <arg value="${db_base_url}/v1/dp/apps/${appId}/scale/${scale}" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -363,7 +363,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="PUT" />
-            <arg value="https://${base_url}/v1/dp/apps/${appId}/scale/0" />
+            <arg value="${db_base_url}/v1/dp/apps/${appId}/scale/0" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
@@ -376,7 +376,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="DELETE" />
-            <arg value="https://${base_url}/v1/dp/apps/${appId}" />
+            <arg value="${db_base_url}/v1/dp/apps/${appId}" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
