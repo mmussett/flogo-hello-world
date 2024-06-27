@@ -17,7 +17,7 @@
     <!-- This ant script is used to build and deploy flogo apps to a TIBCO Data Plane -->
     <property environment="env"/>
 
-    <fail message="TOKEN not set.">
+    <fail message="Environment property TOKEN not set.">
         <condition>
             <not>
                 <isset property="env.TOKEN"/>
@@ -25,7 +25,7 @@
         </condition>
     </fail>
 
-    <fail message="dp_base_url not set.">
+    <fail message="Environment property DP_BASE_URL not set.">
         <condition>
             <not>
                 <isset property="env.DP_BASE_URL"/>
@@ -33,7 +33,23 @@
         </condition>
     </fail>
 
-    <fail message="APP_JSON not set.">
+    <fail message="Environment property CP_BASE_URL not set.">
+        <condition>
+            <not>
+                <isset property="env.CP_BASE_URL"/>
+            </not>
+        </condition>
+    </fail>
+
+    <fail message="Environment property DP_ID not set.">
+        <condition>
+            <not>
+                <isset property="env.DP_ID"/>
+            </not>
+        </condition>
+    </fail>
+
+    <fail message="Environment property APP_JSON not set.">
         <condition>
             <not>
                 <isset property="env.APP_JSON"/>
@@ -42,6 +58,8 @@
     </fail>
 
     <property name="dp_base_url" value="${env.DP_BASE_URL}"/>
+    <property name="cp_base_url" value="${env.CP_BASE_URL}"/>
+    <property name="dp_id" value="${env.DP_ID}"/>
     <property name="app_json" value="${env.APP_JSON}"/>
     <property name="token" value="${env.TOKEN}"/>
 
@@ -54,7 +72,9 @@
 
 
     <echo message="TOKEN: ${token}"/>
-    <echo message="dp_base_url ${dp_base_url}"/>
+    <echo message="DP_BASE_URL ${dp_base_url}"/>
+    <echo message="CP_BASE_URL ${cp_base_url}"/>
+    <echo message="DP_ID ${dp_id}"/>
     <echo message="APP_JSON: ${app_json}"/>
 
     
@@ -68,6 +88,23 @@
       <delete file="./endpoint.json"/>
     </target>
 
+
+    <target name="get_all_apps" depends="">
+
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="GET" />
+            <arg value="${cp_base_url}/cp/v1/apps?dp_id=${dp_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+            <arg value="--output" />
+            <arg value="dp-apps.json" />
+        </exec>
+
+    </target>
 
     <target name="build" depends="">
         
