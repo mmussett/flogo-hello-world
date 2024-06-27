@@ -26,7 +26,7 @@
                 </not>
             </condition>
         </fail>
-        
+
     <property name="base_url" value="${env.BASE_URL}"/>
     <property name="app_json" value="${env.APP_JSON}"/>
     <property name="appid" value="${env.APP_ID}"/>
@@ -53,7 +53,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="POST" />
-            <arg value="https://${base_url}/v1/dp/builds?os=${target_os}&amp;arch=${target_arch}" />
+            <arg value="https://${base_url}/v1/dp/builds" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
@@ -80,14 +80,6 @@
 
 
     <target name="deploy" depends="build">
-
-        <fail message="TOKEN not set.">
-            <condition>
-                <not>
-                    <isset property="env.TOKEN"/>
-                </not>
-            </condition>
-        </fail>
 
         <exec executable="jq" outputproperty="build_id">
             <arg value="--raw-output"/>
@@ -116,14 +108,6 @@
     
     <target name="download" depends="build">
 
-        <fail message="TOKEN not set.">
-            <condition>
-                <not>
-                    <isset property="env.TOKEN"/>
-                </not>
-            </condition>
-        </fail>
-
         <exec executable="jq" outputproperty="build_id">
             <arg value="--raw-output"/>
             <arg value=".buildId"/>
@@ -143,14 +127,6 @@
     </target>
 
     <target name="delete" depends="">
-
-        <fail message="TOKEN not set.">
-            <condition>
-                <not>
-                    <isset property="env.TOKEN"/>
-                </not>
-            </condition>
-        </fail>
 
         <exec executable="jq" outputproperty="appid">
             <arg value="--raw-output"/>
