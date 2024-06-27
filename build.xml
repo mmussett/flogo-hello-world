@@ -107,7 +107,7 @@
         <sleep seconds="${provisioner_build_wait_interval}"/>
 
         <antcall target="get-build-status"/>
-        
+
 
     </target>
 
@@ -348,7 +348,7 @@
         <exec executable="curl">
             <arg value="-X" />
             <arg value="GET" />
-            <arg value="https://${base_url}/v1/dp/builds/${buildId}" />
+            <arg value="https://${base_url}/v1/dp/builds/${buildId}/status" />
             <arg value="--header" />
             <arg value="accept: application/json" />    
             <arg value="--header" />
