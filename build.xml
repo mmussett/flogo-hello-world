@@ -188,7 +188,12 @@
 
     </target>
 
-    <target name="delete-build" depends="">
+    <target name="delete-build">
+        <available file="./build.json" property="build.present"/>
+        <antcall target="_delete-build"/>
+    </target>
+
+    <target name="_delete-build" depends="" if="build.present">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -313,7 +318,15 @@
 
     </target>
 
-    <target name="delete-app" depends="">
+    <target name="delete-app">
+    
+        <available file="./deploy.json" property="deploy.present"/>
+
+        <antcall target="_delete-app"/>
+
+    </target>
+    
+    <target name="_delete-app" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
