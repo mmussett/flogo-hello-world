@@ -149,6 +149,8 @@
 
     <target name="delete-build" depends="">
 
+        <require file="./build.json" />
+
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
             <arg value=".buildId"/>
@@ -171,11 +173,20 @@
 
     <target name="delete-app" depends="">
 
+        <require file="./deploy/app-deploy.json" />
+        <require file="./deploy.json" />
+
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
             <arg value=".appName"/>
             <arg value="./deploy/app-deploy.json"/>
         </exec>
+
+        <exec executable="jq" outputproperty="appId">
+            <arg value="--raw-output"/>
+            <arg value=".appId"/>
+            <arg value="./deploy.json"/>
+        </exec>        
 
         <echo message="Deleting Flogo application ${appName} with AppId ${appId}"/>
 
@@ -202,7 +213,13 @@
             <arg value="Authorization: Bearer ${token}" />
         </exec>
 
+    </target>
 
+    <target name="delete-app-and-build">
+
+        <antcall target="delete-app"/>
+        <antcall target="delete-build"/>
+        
     </target>
 
     <target name="all" depends="clean, build">
