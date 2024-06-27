@@ -91,6 +91,11 @@
 
     <target name="get-app-id" depends="">
 
+        <exec executable="jq" outputproperty="appName">
+            <arg value="--raw-output"/>
+            <arg value=".appName"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
 
         <exec executable="curl">
             <arg value="-X" />
@@ -106,7 +111,7 @@
 
         <exec executable="jq" outputproperty="appid">
             <arg value="--raw-output"/>
-            <arg value=".data[] | select(.app_name == &quot;flogo-hello-world&quot;) | select(.capability_id == &quot;FLOGO&quot;) | .app_id"/>
+            <arg value=".data[] | select(.app_name == &quot;${appName}&quot;) | select(.capability_id == &quot;FLOGO&quot;) | .app_id"/>
             <arg value="dp-apps.json"/>
         </exec>
 
