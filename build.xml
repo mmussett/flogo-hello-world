@@ -189,6 +189,10 @@
             <arg value="Authorization: Bearer ${token}" />
         </exec>
 
+
+        <!-- Wait for Flogo Provisioner to enable service mesh sidecar pod for application -->
+        <sleep seconds="15"/>
+
     </target>
 
 
@@ -212,6 +216,9 @@
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
         </exec>
+
+        <!-- Wait for Flogo Provisioner to enable public endpoints -->
+        <sleep seconds="15"/>
 
     </target>
 
@@ -246,6 +253,10 @@
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
         </exec>
+
+
+        <!-- Wait for Flogo Provisioner to scale application -->
+        <sleep seconds="15"/>
 
     </target>
 
