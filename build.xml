@@ -1,5 +1,19 @@
 <project>
 
+    <macrodef name="require">
+        <attribute name="file"/>
+        <attribute name="message" default="File @{file} not set or missing"/>
+        <sequential>
+            <fail message="@{message}">
+                <condition>
+                    <not>
+                        <available file="@{file}" />
+                    </not>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+
     <!-- This ant script is used to build and deploy flogo apps to a TIBCO Data Plane -->
     <property environment="env"/>
 
@@ -45,9 +59,10 @@
     </target>
 
 
-    <target name="build" depends="init">
+    <target name="build" depends="">
         
-           
+        <require file="./src/${app_json}" />
+
         <echo message="Building Flogo application from source ${app_json}"/>
         
         <exec executable="curl">
@@ -83,12 +98,15 @@
 
 
 
-    <target name="deploy" depends="clean, build">
+    <target name="deploy" depends="">
+
+        <require file="./build.json" />
+        <require file="./deploy/app-deploy.json" />
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
             <arg value=".buildId"/>
-            <arg value="build.json"/>
+            <arg value="./build.json"/>
         </exec>
 
         <exec executable="jq" outputproperty="appName">
