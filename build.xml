@@ -41,7 +41,7 @@
 
     <target name="clean">
       <delete file="./build.json"/>
-
+      <delete file="./deploy.json"/>
     </target>
 
 
