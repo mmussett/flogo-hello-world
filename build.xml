@@ -406,13 +406,13 @@
             <arg value="dp-apps.json" />
         </exec>
 
-        <exec executable="jq" outputproperty="appid">
+        <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
             <arg value=".data[] | select(.app_name == &quot;${appName}&quot;) | select(.capability_id == &quot;FLOGO&quot;) | select(.dp_id == &quot;${dp_id}&quot;) | .app_id"/>
             <arg value="dp-apps.json"/>
         </exec>
 
-        <echo message="Deleting deployed application ${appName} with appId ${appid}"/>
+        <echo message="Deleting deployed application ${appName} with appId ${appId}"/>
 
         <exec executable="curl">
             <arg value="-X" />
