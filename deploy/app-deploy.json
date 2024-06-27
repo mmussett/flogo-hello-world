@@ -1,6 +1,5 @@
 {
     "appName": "flogo-hello-world",
-    "appId":"cpte2lcikhfajg2sgs4g",
     "resourceLimits": {
         "limits": {
          "cpu": "500m",
