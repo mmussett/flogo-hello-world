@@ -3,26 +3,6 @@
     <!-- This ant script is used to build and deploy flogo apps to a TIBCO Data Plane -->
     <property environment="env"/>
 
-    <property name="base_url" value="${env.BASE_URL}"/>
-    <property name="app_json" value="${env.APP_JSON}"/>
-    <property name="appid" value="${env.APP_ID}"/>
-    <property name="token" value="${env.TOKEN}"/>
-
-    <echo message="TOKEN: ${token}"/>
-    <echo message="APP_ID: ${appid}"/>
-    <echo message="BASE_URL ${base_url}"/>
-    <echo message="APP_JSON: ${app_json}"/>
-
-    
-    <target name="init">
-    </target>
-
-    <target name="clean">
-    </target>
-
-
-    <target name="build" depends="init">
-        
         <fail message="TOKEN not set.">
             <condition>
                 <not>
@@ -47,21 +27,26 @@
             </condition>
         </fail>
         
-        <fail message="TARGET_OS not set.">
-            <condition>
-                <not>
-                    <isset property="env.TARGET_OS"/>
-                </not>
-            </condition>
-        </fail>
+    <property name="base_url" value="${env.BASE_URL}"/>
+    <property name="app_json" value="${env.APP_JSON}"/>
+    <property name="appid" value="${env.APP_ID}"/>
+    <property name="token" value="${env.TOKEN}"/>
 
-        <fail message="TARGET_ARCH not set.">
-            <condition>
-                <not>
-                    <isset property="env.TARGET_ARCH"/>
-                </not>
-            </condition>
-        </fail>
+    <echo message="TOKEN: ${token}"/>
+    <echo message="APP_ID: ${appid}"/>
+    <echo message="BASE_URL ${base_url}"/>
+    <echo message="APP_JSON: ${app_json}"/>
+
+    
+    <target name="init">
+    </target>
+
+    <target name="clean">
+    </target>
+
+
+    <target name="build" depends="init">
+        
            
         <echo message="Building Flogo application from source ${app_json}"/>
         
