@@ -19,7 +19,7 @@
   },
   "servers": [
     {
-      "url": "https://flogo.vmlab.live/tibco/apps/cpte2lcikhfajg2sgs4g/ReceiveHTTPMessage"
+      "url": "https://flogo.vmlab.live/tibco/apps/flogo-hello-world/v1/hello-world"
     }
   ],
   "paths": {
