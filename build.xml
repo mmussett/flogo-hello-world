@@ -59,10 +59,6 @@
 
     
     <target name="init">
-
-        <available file="./build.json" property="build.present"/>
-        <available file="./deploy.json" property="deploy.present"/>
-
     </target>
 
     <target name="clean" depends="delete-app-and-build">
@@ -140,7 +136,7 @@
 
 
 
-    <target name="deploy" depends="" if="build.present">
+    <target name="deploy" depends="" if="">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -216,7 +212,7 @@
 
     </target>
 
-    <target name="enable-service-mesh" depends="" if="deploy.present">
+    <target name="enable-service-mesh" depends="" if="">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
@@ -245,7 +241,7 @@
     </target>
 
 
-    <target name="enable-public-endpoints" depends="" if="deploy.present">
+    <target name="enable-public-endpoints" depends="" if="">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
@@ -278,7 +274,7 @@
 
     </target>
 
-    <target name="scale-app" depends="" if="deploy.present">
+    <target name="scale-app" depends="" if="">
 
 
         <fail message="APP_SCALE not set.">
