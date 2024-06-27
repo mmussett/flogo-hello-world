@@ -54,6 +54,7 @@
     </target>
 
     <target name="clean">
+      <antcall target="delete-app-and-build"/>
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
     </target>
@@ -219,7 +220,7 @@
 
         <antcall target="delete-app"/>
         <antcall target="delete-build"/>
-        
+
     </target>
 
     <target name="all" depends="clean, build">
