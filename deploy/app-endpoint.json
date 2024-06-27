@@ -1,0 +1,11 @@
+{
+    "ingressClassName": "nginx",
+    "ingressControllerName": "flogo nginx",
+    "ingressHostName": "flogo.vmlab.live",
+    "portServicePathMappings": [
+      {
+        "port": 9999,
+        "servicePath": "/tibco/apps/flogo-hello-world/v1"
+      }
+    ]
+  }

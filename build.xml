@@ -141,7 +141,7 @@
         </exec>
 
         <!-- Wait for Flogo Provisioner to deploy application -->
-        <sleep seconds="15"/>
+        <sleep seconds="20"/>
 
         <echo message="Application ${appName} deployed as AppId ${appId}"/>
 
@@ -206,16 +206,21 @@
 
         <echo message="Enabling Public Endpoints for Flogo application ${appName} with AppId ${appId}"/>
 
-
         <exec executable="curl">
             <arg value="-X" />
-            <arg value="PUT" />
+            <arg value="POST" />
             <arg value="https://${base_url}/v1/dp/apps/${appId}/endpoints/public" />
             <arg value="--header" />
-            <arg value="accept: application/json" />    
+            <arg value="accept: application/json" />
+            <arg value="--header" />
+            <arg value="Content-Type: application/json" />        
             <arg value="--header" />
             <arg value="Authorization: Bearer ${token}" />
-        </exec>
+            <arg value="--data" />
+            <arg value="@./deploy/app-endpoint.json" />
+            <arg value="--output" />
+            <arg value="endpoint.json" />
+        </exec>        
 
         <!-- Wait for Flogo Provisioner to enable public endpoints -->
         <sleep seconds="15"/>
@@ -256,7 +261,7 @@
 
 
         <!-- Wait for Flogo Provisioner to scale application -->
-        <sleep seconds="15"/>
+        <sleep seconds="20"/>
 
     </target>
 
