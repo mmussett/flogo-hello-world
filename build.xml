@@ -329,10 +329,8 @@
 
     </target>
 
-    <target name="delete-app-and-build" depends="delete-app, delete-build">
+    <target name="delete-app-and-build" depends="init, delete-app, delete-build">
     </target>
 
-    <target name="all" depends="clean, build, deploy">
-    </target>
 
 </project>
