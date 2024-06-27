@@ -89,7 +89,7 @@
     </target>
 
 
-    <target name="_get-app-id" depends="">
+    <target name="get-app-id" depends="">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
@@ -269,18 +269,31 @@
     </target>
 
 
-    <target name="enable-service-mesh">
-        <available file="./deploy.json" property="deploy.present"/>
-        <antcall target="_enable-service-mesh"/>
-    </target>
+    <target name="enable-service-mesh" depends="">
 
-    <target name="_enable-service-mesh" depends="" if="deploy.present">
+        <exec executable="jq" outputproperty="appName">
+            <arg value="--raw-output"/>
+            <arg value=".appName"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="GET" />
+            <arg value="${cp_base_url}/cp/v1/apps?dp_id=${dp_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+            <arg value="--output" />
+            <arg value="dp-apps.json" />
+        </exec>
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
-            <arg value=".appId"/>
-            <arg value="./deploy.json"/>
-        </exec>        
+            <arg value=".data[] | select(.app_name == &quot;${appName}&quot;) | select(.capability_id == &quot;FLOGO&quot;) | select(.dp_id == &quot;${dp_id}&quot;) | .app_id"/>
+            <arg value="dp-apps.json"/>
+        </exec>         
 
         <echo message="Enabling Service Mesh for Flogo application ${appName} with AppId ${appId}"/>
 
@@ -303,18 +316,32 @@
     </target>
 
 
-    <target name="enable-public-endpoints">
-        <available file="./deploy.json" property="deploy.present"/>
-        <antcall target="_enable-public-endpoints"/>
-    </target>
 
-    <target name="_enable-public-endpoints" depends="" if="deploy.present">
+    <target name="enable-public-endpoints" depends="">
+
+        <exec executable="jq" outputproperty="appName">
+            <arg value="--raw-output"/>
+            <arg value=".appName"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="GET" />
+            <arg value="${cp_base_url}/cp/v1/apps?dp_id=${dp_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+            <arg value="--output" />
+            <arg value="dp-apps.json" />
+        </exec>
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
-            <arg value=".appId"/>
-            <arg value="./deploy.json"/>
-        </exec>        
+            <arg value=".data[] | select(.app_name == &quot;${appName}&quot;) | select(.capability_id == &quot;FLOGO&quot;) | select(.dp_id == &quot;${dp_id}&quot;) | .app_id"/>
+            <arg value="dp-apps.json"/>
+        </exec>           
 
         <echo message="Enabling Public Endpoints for Flogo application ${appName} with AppId ${appId}"/>
 
@@ -342,12 +369,7 @@
     </target>
 
 
-    <target name="scale-app">
-        <available file="./deploy.json" property="deploy.present"/>
-        <antcall target="_scale-app"/>
-    </target>
-
-    <target name="_scale-app" depends="" if="deploy.present">
+    <target name="scale-app" depends="">
 
         <fail message="APP_SCALE not set.">
             <condition>
@@ -359,11 +381,29 @@
 
         <property name="scale" value="${env.APP_SCALE}"/>
 
+        <exec executable="jq" outputproperty="appName">
+            <arg value="--raw-output"/>
+            <arg value=".appName"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="GET" />
+            <arg value="${cp_base_url}/cp/v1/apps?dp_id=${dp_id}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+            <arg value="--output" />
+            <arg value="dp-apps.json" />
+        </exec>
+
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
-            <arg value=".appId"/>
-            <arg value="./deploy.json"/>
-        </exec>        
+            <arg value=".data[] | select(.app_name == &quot;${appName}&quot;) | select(.capability_id == &quot;FLOGO&quot;) | select(.dp_id == &quot;${dp_id}&quot;) | .app_id"/>
+            <arg value="dp-apps.json"/>
+        </exec>      
 
         <echo message="Scaling Flogo application ${appName} with AppId ${appId}"/>
 
