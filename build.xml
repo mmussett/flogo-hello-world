@@ -188,7 +188,7 @@
 
     </target>
 
-    <target name="delete-build" depends="" if="build.present">
+    <target name="delete-build" depends="">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -313,7 +313,7 @@
 
     </target>
 
-    <target name="delete-app" depends="" if="deploy.present">
+    <target name="delete-app" depends="">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
