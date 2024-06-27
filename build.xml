@@ -65,7 +65,7 @@
 
     </target>
 
-    <target name="clean" depends="init, delete-app-and-build">
+    <target name="clean" depends="delete-app-and-build">
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
       <delete file="./build-status.json"/>
@@ -73,7 +73,7 @@
     </target>
 
 
-    <target name="build" depends="init">
+    <target name="build" depends="">
         
         <require file="./src/${app_json}" />
 
@@ -140,7 +140,7 @@
 
 
 
-    <target name="deploy" depends="init" if="build.present">
+    <target name="deploy" depends="" if="build.present">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -188,7 +188,7 @@
 
     </target>
 
-    <target name="delete-build" depends="init" if="build.present">
+    <target name="delete-build" depends="" if="build.present">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -211,7 +211,7 @@
 
     </target>
 
-    <target name="enable-service-mesh" depends="init" if="deploy.present">
+    <target name="enable-service-mesh" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
@@ -240,7 +240,7 @@
     </target>
 
 
-    <target name="enable-public-endpoints" depends="init" if="deploy.present">
+    <target name="enable-public-endpoints" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
@@ -273,7 +273,7 @@
 
     </target>
 
-    <target name="scale-app" depends="init" if="deploy.present">
+    <target name="scale-app" depends="" if="deploy.present">
 
 
         <fail message="APP_SCALE not set.">
@@ -313,7 +313,7 @@
 
     </target>
 
-    <target name="delete-app" depends="init" if="deploy.present">
+    <target name="delete-app" depends="" if="deploy.present">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
@@ -360,7 +360,7 @@
 
     </target>
 
-    <target name="delete-app-and-build" depends="init, delete-app, delete-build">
+    <target name="delete-app-and-build" depends="delete-app, delete-build">
     </target>
 
 
