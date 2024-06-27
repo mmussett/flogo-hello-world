@@ -81,7 +81,7 @@
     <target name="init">
     </target>
 
-    <target name="clean" depends="delete-deployed-app">
+    <target name="clean" depends="delete-app">
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
       <delete file="./build-status.json"/>
@@ -426,7 +426,7 @@
 
     </target>
 
-    <target name="delete-deployed-app">
+    <target name="delete-app">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
@@ -482,59 +482,7 @@
     </target>
 
 
-    <target name="delete-app">
-        <available file="./deploy.json" property="deploy.present"/>
-        <antcall target="_delete-app"/>
-    </target>
-    
-    <target name="_delete-app" depends="_get-app-id" if="deploy.present">
-
-
-        <exec executable="jq" outputproperty="appName">
-            <arg value="--raw-output"/>
-            <arg value=".appName"/>
-            <arg value="./deploy/app-deploy.json"/>
-        </exec>
-
-        <exec executable="jq" outputproperty="appId">
-            <arg value="--raw-output"/>
-            <arg value=".appId"/>
-            <arg value="./deploy.json"/>
-        </exec>        
-
-        <echo message="Deleting Flogo application ${appName} with AppId ${appId}"/>
-
-
-        <!-- Scale to 0 -->
-
-        <exec executable="curl">
-            <arg value="-X" />
-            <arg value="PUT" />
-            <arg value="${dp_base_url}/v1/dp/apps/${appId}/scale/0" />
-            <arg value="--header" />
-            <arg value="accept: application/json" />    
-            <arg value="--header" />
-            <arg value="Authorization: Bearer ${token}" />
-        </exec>
-
-        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_scale_wait_interval} seconds)" />  
-        <sleep seconds="${provisioner_scale_wait_interval}"/>
-
-        <exec executable="curl">
-            <arg value="-X" />
-            <arg value="DELETE" />
-            <arg value="${dp_base_url}/v1/dp/apps/${appId}" />
-            <arg value="--header" />
-            <arg value="accept: application/json" />    
-            <arg value="--header" />
-            <arg value="Authorization: Bearer ${token}" />
-        </exec>
-
-        <echo message="Waiting for Flogo Provisioner to complete (${provisioner_delete_wait_interval} seconds)" />  
-        <sleep seconds="${provisioner_delete_wait_interval}"/>
-
-    </target>
-
+   
     <target name="delete-app-and-build" depends="delete-app, delete-build">
     </target>
 
