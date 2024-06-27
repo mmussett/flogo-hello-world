@@ -29,11 +29,9 @@
 
     <property name="base_url" value="${env.BASE_URL}"/>
     <property name="app_json" value="${env.APP_JSON}"/>
-    <property name="appid" value="${env.APP_ID}"/>
     <property name="token" value="${env.TOKEN}"/>
 
     <echo message="TOKEN: ${token}"/>
-    <echo message="APP_ID: ${appid}"/>
     <echo message="BASE_URL ${base_url}"/>
     <echo message="APP_JSON: ${app_json}"/>
 
@@ -85,7 +83,7 @@
 
 
 
-    <target name="deploy" depends="build">
+    <target name="deploy" depends="clean, build">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -113,9 +111,21 @@
             <arg value="Authorization: Bearer ${token}" />
             <arg value="--data" />
             <arg value="@./deploy/app-deploy.json" />
+            <arg value="--output" />
+            <arg value="deploy.json" />
         </exec>
 
+        <exec executable="jq" outputproperty="appId">
+            <arg value="--raw-output"/>
+            <arg value=".appId"/>
+            <arg value="./deploy.json"/>
+        </exec>
+
+        <!-- Wait for Flogo Provisioner to deploy application -->
         <sleep seconds="15"/>
+
+        <echo message="Application ${appName} deployed as AppId ${appId}"/>
+
 
     </target>
 
@@ -141,13 +151,7 @@
     </target>
 
 
-    <target name="delete" depends="">
-
-        <exec executable="jq" outputproperty="appId">
-            <arg value="--raw-output"/>
-            <arg value=".appId"/>
-            <arg value="./deploy/app-deploy.json"/>
-        </exec>
+    <target name="delete-app" depends="">
 
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
