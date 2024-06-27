@@ -68,6 +68,7 @@
     <target name="clean" depends="init, delete-app-and-build">
       <delete file="./build.json"/>
       <delete file="./deploy.json"/>
+      <delete file="./build-status.json"/>
     </target>
 
 
@@ -105,11 +106,14 @@
         <echo message="Waiting for Flogo Provisioner to complete (${provisioner_build_wait_interval} seconds)" />
         <sleep seconds="${provisioner_build_wait_interval}"/>
 
+        <antcall target="get-build-status"/>
+        
+
     </target>
 
 
 
-    <target name="deploy" depends="init">
+    <target name="deploy" depends="init" if="build.present">
 
         <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
@@ -332,5 +336,35 @@
     <target name="delete-app-and-build" depends="init, delete-app, delete-build">
     </target>
 
+
+    <target name="get-build-status" depends="init" if="build.present">
+    
+        <exec executable="jq" outputproperty="buildId">
+            <arg value="--raw-output"/>
+            <arg value=".buildId"/>
+            <arg value="build.json"/>
+        </exec>
+
+        <exec executable="curl">
+            <arg value="-X" />
+            <arg value="GET" />
+            <arg value="https://${base_url}/v1/dp/builds/${buildId}" />
+            <arg value="--header" />
+            <arg value="accept: application/json" />    
+            <arg value="--header" />
+            <arg value="Authorization: Bearer ${token}" />
+            <arg value="--output" />
+            <arg value="build-status.json" />
+        </exec>
+    
+        <exec executable="jq" outputproperty="build.status">
+            <arg value="--raw-output"/>
+            <arg value=".status"/>
+            <arg value="./build-status.json"/>
+        </exec>    
+
+        <echo message="Build status is ${build.status}"/>
+
+    </target>
 
 </project>
