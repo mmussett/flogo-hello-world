@@ -74,6 +74,8 @@
 
         <echo message="Generated BUILD_ID: ${build_id}" />
 
+        <!-- Need to sleep for at least 15 seconds as the build is asynchronous, waiting for the flogo provisioner to actually do its thing! -->
+        <sleep seconds="15"/>
 
     </target>
 
@@ -81,16 +83,30 @@
 
     <target name="deploy" depends="build">
 
-        <exec executable="jq" outputproperty="build_id">
+        <exec executable="jq" outputproperty="buildId">
             <arg value="--raw-output"/>
             <arg value=".buildId"/>
             <arg value="build.json"/>
         </exec>
 
+        <exec executable="jq" outputproperty="appId">
+            <arg value="--raw-output"/>
+            <arg value=".appId"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
+
+        <exec executable="jq" outputproperty="appName">
+            <arg value="--raw-output"/>
+            <arg value=".appName"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
+
+        <echo message="Deploying Flogo application ${appName} using BuildId ${buildId} for AppId ${appId}"/>
+
         <exec executable="curl">
             <arg value="-X" />
             <arg value="POST" />
-            <arg value="https://${base_url}/v1/dp/builds/${build_id}/deploy" />
+            <arg value="https://${base_url}/v1/dp/builds/${buildId}/deploy" />
             <arg value="--header" />
             <arg value="accept: application/json" />
             <arg value="--header" />
@@ -106,33 +122,21 @@
     </target>
 
     
-    <target name="download" depends="build">
-
-        <exec executable="jq" outputproperty="build_id">
-            <arg value="--raw-output"/>
-            <arg value=".buildId"/>
-            <arg value="build.json"/>
-        </exec>
-
-        <exec executable="curl">
-            <arg value="-X" />
-            <arg value="GET" />
-            <arg value="https://${base_url}/v1/dp/builds/${build_id}" />
-            <arg value="--header" />
-            <arg value="accept: application/octet-stream" />
-            <arg value="--header" />
-            <arg value="Authorization: Bearer ${token}" />
-        </exec>
-
-    </target>
-
     <target name="delete" depends="">
 
-        <exec executable="jq" outputproperty="appid">
+        <exec executable="jq" outputproperty="appId">
             <arg value="--raw-output"/>
             <arg value=".appId"/>
             <arg value="./deploy/app-deploy.json"/>
         </exec>
+
+        <exec executable="jq" outputproperty="appName">
+            <arg value="--raw-output"/>
+            <arg value=".appName"/>
+            <arg value="./deploy/app-deploy.json"/>
+        </exec>
+
+        <echo message="Deleting Flogo application ${appName} with AppId ${appId}"/>
 
 
         <!-- Scale to 0 -->
