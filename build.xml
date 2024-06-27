@@ -93,19 +93,13 @@
             <arg value="build.json"/>
         </exec>
 
-        <exec executable="jq" outputproperty="appId">
-            <arg value="--raw-output"/>
-            <arg value=".appId"/>
-            <arg value="./deploy/app-deploy.json"/>
-        </exec>
-
         <exec executable="jq" outputproperty="appName">
             <arg value="--raw-output"/>
             <arg value=".appName"/>
             <arg value="./deploy/app-deploy.json"/>
         </exec>
 
-        <echo message="Deploying Flogo application ${appName} using BuildId ${buildId} for AppId ${appId}"/>
+        <echo message="Deploying Flogo application ${appName} using BuildId ${buildId}"/>
 
         <exec executable="curl">
             <arg value="-X" />
