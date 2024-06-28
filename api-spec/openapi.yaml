@@ -2,7 +2,7 @@
   "openapi" : "3.0.0",
   "info" : {
     "title" : "Flogo Hello-World API 3.0",
-    "description" : "",
+    "description" : "Simple Flogo Hello-World API",
     "termsOfService" : "http://swagger.io/terms/",
     "contact" : {
       "email" : "mmussett@tibco.com"
