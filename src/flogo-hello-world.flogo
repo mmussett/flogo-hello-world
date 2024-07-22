@@ -8,7 +8,7 @@
     "github.com/project-flogo/contrib/function/string"
   ],
   "name": "flogo-hello-world",
-  "description": "",
+  "description": "Simple Hello World Example",
   "version": "1.0.0",
   "type": "flogo:app",
   "appModel": "1.1.1",
